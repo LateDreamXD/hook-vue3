@@ -7,17 +7,9 @@
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "js": ["content.iife.js"],
-    "run_at": "document_end"
+    "run_at": "document_start"
   }],
-  "background": {
-    "service_worker": "background.iife.js"
-  },
-  "action": {
-    "default_title": "%name%",
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  },
   "icons": {
-    "768": "icon.png"
+    "200": "icon.png"
   }
 }
