@@ -10,7 +10,6 @@ const start_time = Date.now();
 template.name = package_json.name;
 template.description = package_json.description;
 template.version = package_json.version;
-template.action.default_title = package_json.name;
 
 try {
 	fs.writeFileSync(
