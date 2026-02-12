@@ -22,19 +22,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          cache: 'npm'
           node-version: ${{ matrix.node }}
       - name: Install dependencies and build
         run: |
           npm install
           npm run build
           cp LICENSE dist/LICENSE
+          mkdir plugin
+          mkdir plugin/hook-vue
+          mv dist/* plugin/hook-vue
       - uses: TheDoctor0/zip-release@0.7.6
         with:
-          directory: dist
-          filename: 'chrome-extension-${{ github.ref_name }}.zip'
+          directory: plugin
+          filename: 'hook-vue-${{ github.ref_name }}.zip'
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: 'dist/chrome-extension-${{ github.ref_name }}.zip'
-          draft: true
-          name: 'Chrome Extension ${{ github.ref_name }}'
+          artifacts: 'plugin/hook-vue-${{ github.ref_name }}.zip'
