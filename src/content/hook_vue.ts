@@ -27,7 +27,7 @@ function listenComponentMount(component) {
 				listenComponentUnmount(component);
 				recordComponent(component);
 				logger.debug('comp mounted', component);
-				window.dispatchEvent(new CustomEvent('hook-vue:component_mount', { detail: component }));
+				window.dispatchEvent(new CustomEvent('hook-vue:comp_mount', { detail: component }));
 			}
 		}
 	});
@@ -44,7 +44,7 @@ function listenComponentUnmount(component) {
 			if (!unhooked && value) {
 				unhooked = true;
 				logger.debug('comp unmounted', component);
-				window.dispatchEvent(new CustomEvent('hook-vue:component_unmount', { detail: component }));
+				window.dispatchEvent(new CustomEvent('hook-vue:comp_unmount', { detail: component }));
 			}
 		}
 	});
