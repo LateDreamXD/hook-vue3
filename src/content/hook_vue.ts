@@ -29,7 +29,7 @@ function listenComponentMount(component) {
 				listenComponentUnmount(component);
 				recordComponent(component);
 				logger.debug('comp mounted', component);
-				window.dispatchEvent(new CustomEvent('hook-vue:comp_mount', { detail: component }));
+				document.dispatchEvent(new CustomEvent('hook-vue:comp_mount', { detail: component }));
 			}
 		}
 	});
@@ -46,7 +46,7 @@ function listenComponentUnmount(component) {
 			if (!unhooked && value) {
 				unhooked = true;
 				logger.debug('comp unmounted', component);
-				window.dispatchEvent(new CustomEvent('hook-vue:comp_unmount', { detail: component }));
+				document.dispatchEvent(new CustomEvent('hook-vue:comp_unmount', { detail: component }));
 			}
 		}
 	});
@@ -56,7 +56,6 @@ function listenComponentUnmount(component) {
 function proxyProxy(func) {
 	return new Proxy(func, {
 		construct(target, argArray, newTarget) {
-			logger.debug('new call', argArray);
 			const component = argArray[0]?._;
 			const hasValidUid = component?.uid >= 0;
 			if (hasValidUid) {
@@ -68,6 +67,7 @@ function proxyProxy(func) {
 					listenComponentMount(component);
 				}
 			}
+			component && logger.debug('new comp:', component);
 			return Reflect.construct(target, argArray, newTarget);
 		}
 	});
@@ -76,6 +76,6 @@ function proxyProxy(func) {
 
 export function initHook() {
 	Proxy = proxyProxy(Proxy);
-	window.dispatchEvent(new CustomEvent('hook-vue:init'));
-	logger.log('vue hook initialized');
+	document.dispatchEvent(new CustomEvent('hook-vue:init'));
+	logger.log('hook initialized');
 }
