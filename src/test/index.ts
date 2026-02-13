@@ -1,4 +1,4 @@
-import { initHook } from '../content/hook_vue';
+import { initHook } from '../content/hook';
 window.addEventListener('hook-vue:init', () => {
 	console.log('[event listener] hook-vue init');
 });
