@@ -3,11 +3,16 @@ import logger from './logger';
 
 function recordComponent(component) {
 	let element = component.vnode.el;
+	let isBindToParent = false;
 	while (!(element instanceof HTMLElement)) {
 		element = element.parentElement;
+		isBindToParent = true;
 	}
-	logger.debug('bind to attr', component, element);
-	if(element.__vue__) {
+	logger.debug('bind to el attr', component, element, isBindToParent);
+	if(isBindToParent) {
+		element.__child_vue_comps__ = element.__child_vue_comps__ || [];
+		element.__child_vue_comps__.push(component);
+	} else if(element.__vue__) {
 		if(element.__vue__ === component) return;
 		else {
 			element.__vue_comps__ = element.__vue_comps__ || [];
