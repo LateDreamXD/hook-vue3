@@ -8,7 +8,7 @@ const app_comp = app.__vue__;
 
 ## events
 ```js
-window.addEventListener('hook-vue:init', /* ... */);
-window.addEventListener('hook-vue:comp_mount', ({ detail: { component } }) => /* ... */);
-window.addEventListener('hook-vue:comp_unmount', ({ detail: { component } }) => /* ... */);
+document.addEventListener('hook-vue:init', /* ... */);
+document.addEventListener('hook-vue:comp_mount', ({ detail: { component } }) => /* ... */);
+document.addEventListener('hook-vue:comp_unmount', ({ detail: { component } }) => /* ... */);
 ```
